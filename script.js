@@ -346,4 +346,169 @@ document.head.appendChild(style);
 // Add ripple effect to buttons
 document.querySelectorAll('.btn').forEach(button => {
     button.addEventListener('click', createRipple);
-}); 
+});
+
+// Photo Gallery System
+const photoGalleries = {
+    'qfc-gallery': [
+        {
+            src: 'images/2024_fall_food_drive/20241207_102741.jpg',
+            title: 'QFC Food Drive Setup',
+            description: 'Our FBLA members setting up the food collection station at QFC for the 2024 Fall Hunger Busters drive.'
+        },
+        {
+            src: 'images/2024_fall_food_drive/20241207_132337.jpg',
+            title: 'FBLA Members Volunteering',
+            description: 'Team members working together during the afternoon shift, organizing donations and assisting shoppers.'
+        },
+        {
+            src: 'images/2024_fall_food_drive/IMG_9174.JPG',
+            title: 'Food Collection Results',
+            description: 'The impressive results of our community food drive - helping local families through the Hopelink Foundation.'
+        },
+        {
+            src: 'images/2024_fall_food_drive/IMG_20241207_175800.jpg',
+            title: 'Community Volunteers',
+            description: 'FBLA members and community volunteers working together at the end of a successful collection day.'
+        }
+    ],
+    'easter-gallery': [
+        {
+            src: 'images/2025_easter_food_drive/IMG_8621.jpg',
+            title: 'Easter Food Drive Setup',
+            description: 'Setting up our Easter food drive collection point with festive decorations and organized donation areas.'
+        },
+        {
+            src: 'images/2025_easter_food_drive/IMG_8625.jpg',
+            title: 'Volunteers Organizing Donations',
+            description: 'FBLA members carefully sorting and organizing food donations and Easter treats for local families.'
+        },
+        {
+            src: 'images/2025_easter_food_drive/IMG_8639.jpg',
+            title: 'Easter Food Collection',
+            description: 'The growing collection of food items and holiday supplies gathered through community generosity.'
+        },
+        {
+            src: 'images/2025_easter_food_drive/IMG_8646.jpg',
+            title: 'Community Impact',
+            description: 'Final preparations before distributing Easter food packages to families in need throughout our community.'
+        }
+    ]
+};
+
+let currentGallery = '';
+let currentPhotoIndex = 0;
+
+// Open Lightbox
+function openLightbox(galleryName, photoIndex) {
+    currentGallery = galleryName;
+    currentPhotoIndex = photoIndex;
+    
+    const modal = document.getElementById('lightbox-modal');
+    const image = document.getElementById('lightbox-image');
+    
+    const gallery = photoGalleries[galleryName];
+    const photo = gallery[photoIndex];
+    
+    image.src = photo.src;
+    image.alt = photo.title;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Add animation delay for smooth entrance
+    setTimeout(() => {
+        image.style.opacity = '1';
+    }, 100);
+}
+
+// Close Lightbox
+function closeLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Change Photo
+function changePhoto(direction) {
+    const gallery = photoGalleries[currentGallery];
+    currentPhotoIndex += direction;
+    
+    if (currentPhotoIndex < 0) {
+        currentPhotoIndex = gallery.length - 1;
+    } else if (currentPhotoIndex >= gallery.length) {
+        currentPhotoIndex = 0;
+    }
+    
+    const image = document.getElementById('lightbox-image');
+    const photo = gallery[currentPhotoIndex];
+    
+    // Fade out
+    image.style.opacity = '0';
+    
+    setTimeout(() => {
+        image.src = photo.src;
+        image.alt = photo.title;
+        
+        // Fade in
+        image.style.opacity = '1';
+    }, 150);
+}
+
+// Keyboard Navigation
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('lightbox-modal');
+    if (modal.classList.contains('active')) {
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                changePhoto(-1);
+                break;
+            case 'ArrowRight':
+                changePhoto(1);
+                break;
+        }
+    }
+});
+
+// Close lightbox when clicking outside the image
+document.getElementById('lightbox-modal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+        closeLightbox();
+    }
+});
+
+// Prevent lightbox content from closing when clicked
+document.querySelector('.lightbox-content').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
+// Add touch/swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.getElementById('lightbox-modal').addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.getElementById('lightbox-modal').addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe left - next photo
+            changePhoto(1);
+        } else {
+            // Swipe right - previous photo
+            changePhoto(-1);
+        }
+    }
+} 

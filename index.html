@@ -172,6 +172,35 @@
                             <span class="stat-badge">2,250+ lbs donated</span>
                             <span class="stat-badge">Community Impact</span>
                         </div>
+                        <div class="event-photos">
+                            <h4>Event Photos</h4>
+                            <div class="photo-grid">
+                                <div class="photo-thumbnail" onclick="openLightbox('qfc-gallery', 0)">
+                                    <img src="images/2024_fall_food_drive/20241207_102741.jpg" alt="QFC Food Drive Setup">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('qfc-gallery', 1)">
+                                    <img src="images/2024_fall_food_drive/20241207_132337.jpg" alt="FBLA Members Volunteering">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('qfc-gallery', 2)">
+                                    <img src="images/2024_fall_food_drive/IMG_9174.JPG" alt="Food Collection Results">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('qfc-gallery', 3)">
+                                    <img src="images/2024_fall_food_drive/IMG_20241207_175800.jpg" alt="Community Volunteers">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="event-card">
@@ -184,6 +213,48 @@
                         <div class="event-stats">
                             <span class="stat-badge">North Creek HS</span>
                             <span class="stat-badge">Leadership Skills</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-egg"></i>
+                    </div>
+                    <div class="event-content">
+                        <h3>Easter Food Drive 2025</h3>
+                        <p>This Easter season, our FBLA chapter organized a special food drive to support local families during the holiday. Working with community partners and volunteers, we collected essential food items and Easter treats to bring joy and support to families in need throughout our community.</p>
+                        <div class="event-stats">
+                            <span class="stat-badge">Easter 2025</span>
+                            <span class="stat-badge">Holiday Support</span>
+                        </div>
+                        <div class="event-photos">
+                            <h4>Easter Drive Photos</h4>
+                            <div class="photo-grid">
+                                <div class="photo-thumbnail" onclick="openLightbox('easter-gallery', 0)">
+                                    <img src="images/2025_easter_food_drive/IMG_8621.jpg" alt="Easter Food Drive Setup">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('easter-gallery', 1)">
+                                    <img src="images/2025_easter_food_drive/IMG_8625.jpg" alt="Volunteers Organizing Donations">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('easter-gallery', 2)">
+                                    <img src="images/2025_easter_food_drive/IMG_8639.jpg" alt="Easter Food Collection">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="photo-thumbnail" onclick="openLightbox('easter-gallery', 3)">
+                                    <img src="images/2025_easter_food_drive/IMG_8646.jpg" alt="Community Impact">
+                                    <div class="photo-overlay">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -278,6 +349,20 @@
             </div>
         </div>
     </footer>
+
+    <!-- Photo Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <button class="lightbox-nav lightbox-prev" onclick="changePhoto(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" onclick="changePhoto(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <img id="lightbox-image" src="" alt="">
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
